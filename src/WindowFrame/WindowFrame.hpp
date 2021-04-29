@@ -9,12 +9,15 @@
 class WindowFrame  
 {
 	private:
+		SDL_DisplayMode CurrentDisplayMode;
 
 	public:
 
 		WindowFrame();
 		~WindowFrame();
 		void InitVideo();
+		SDL_Window* CreateWindow();
+		SDL_DisplayMode SetDisplayMode();
 
 };
 #endif

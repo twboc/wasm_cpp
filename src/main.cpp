@@ -22,59 +22,9 @@ int main(int argc, char *args[])
     testNode->Noop();
 
     WindowFrame* _window_frame = new WindowFrame();
-
     _window_frame->InitVideo();
-
-    SDL_Window *window = NULL;
-    int WIDTH = 640;
-    int HEIGHT = 480;
-
-    SDL_DisplayMode CurrentDisplayMode;
-
-    // // Initialize SDL systems
-    // if (SDL_Init(SDL_INIT_VIDEO) < 0)
-    // {
-    //     printf("SDL could not initialize! SDL_Error: %s\n",
-    //            SDL_GetError());
-
-    //     return 1;
-    // }
-
-    // Get current display mode of all displays.
-    for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i)
-    {
-        int should_be_zero = SDL_GetCurrentDisplayMode(i, &CurrentDisplayMode);
-        if (should_be_zero != 0)
-        {
-            // In case of error...
-            SDL_Log("Could not get display mode for video display #%d: %s", i, SDL_GetError());
-
-        }
-        else
-        {
-            // On success, print the current display mode.
-            SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz.", i, CurrentDisplayMode.w, CurrentDisplayMode.h, CurrentDisplayMode.refresh_rate);
-        }
-    }
-
-    WIDTH = CurrentDisplayMode.w;
-    HEIGHT = CurrentDisplayMode.h;
-
-    //Create a window
-    window = SDL_CreateWindow(
-        "WASM CPP - DEMO",
-        CurrentDisplayMode.w / 4,
-        CurrentDisplayMode.h / 4,
-        CurrentDisplayMode.w / 2,
-        CurrentDisplayMode.h / 2,
-        SDL_WINDOW_SHOWN
-    );
-
-    if (window == NULL)
-    {
-        printf("Window could not be created! SDL_Error: %s\n",
-               SDL_GetError());
-    }
+    SDL_DisplayMode CurrentDisplayMode = _window_frame->SetDisplayMode();
+    SDL_Window* window = _window_frame->CreateWindow();
 
     // Collect information about the window from SDL
     SDL_SysWMinfo wmi;
@@ -86,7 +36,7 @@ int main(int argc, char *args[])
 
     Renderer *_renderer = new Renderer();
     _renderer->SetPlatformData(wmi);
-    _renderer->Bootstrap(WIDTH, HEIGHT);
+    _renderer->Bootstrap(CurrentDisplayMode.w, CurrentDisplayMode.h);
 
     // Poll for events and wait till user closes window
     bool quit = false;
