@@ -67,6 +67,7 @@ int main(int argc, char *args[])
     }
 
     _renderer->Shutdown();
+    _window_frame->Shutdown();
     SDL_DestroyWindow(window);
     SDL_Quit();
 

@@ -16,6 +16,7 @@ class WindowFrame
 		WindowFrame();
 		~WindowFrame();
 		void InitVideo();
+		void Shutdown();
 		SDL_Window* CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags);
 		SDL_DisplayMode SetDisplayMode();
 
