@@ -5,17 +5,26 @@
 #include "wasmer.h"
 #include <iostream>
 #include <assert.h>
+
+#include "./WASMNodeStructs.cpp"
 	
 class WASMNode  
 {
 	private:
+		FILE file;
+		WASMNode_file_node_t file_node;
+		wasmer_import_t imports;
+		wasmer_instance_t *instance = NULL;
+		WASMNode& SetFileNode(FILE *file, const char* path, uint8_t *bytes, long length);
 
 	public:
 
-		WASMNode();
+		WASMNode(const char* path, char* _mode = "r");
 		~WASMNode();
 
-		void Echo();
+		WASMNode& Noop();
+		WASMNode& ReadFile(FILE *file, const char* path, char* _mode = "r");
+		WASMNode& Instantiate();
 
 };
 #endif
