@@ -36,3 +36,5 @@ bgfx
 bimg
 bx
 main
+wasm/node_modules
+wasm/build
