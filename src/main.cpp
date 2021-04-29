@@ -1,20 +1,20 @@
-
 #include <stdio.h>
-
-
-
-#include "wasmer.h"
 #include <assert.h>
 #include <stdint.h>
-
 #include <iostream>
 #include <string>
 
+#include "wasmer.h"
+
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_syswm.h>
+#include <SDL2/SDL_syswm.h>
+
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
-#include <SDL2/SDL_syswm.h>
-#include <SDL2/SDL_syswm.h>
+
+#include "./WASMNode/WASMNode.cpp"
+
 
 SDL_Window *window = NULL;
 int WIDTH = 640;
@@ -25,11 +25,9 @@ struct position_t {
     int y;
 } WindowPosition;
 
-int main(int argc, char *args[])
-{
-
+wasmer_instance_t* GetWasmFile(const char* path, char* _mode = "r") {
     // Read the Wasm file bytes.
-    FILE *file = std::fopen("wasm/build/optimized.wasm", "r");
+    FILE *file = std::fopen(path, "r");
     std::fseek(file, 0, SEEK_END);
     long len = std::ftell(file);
     uint8_t *bytes = static_cast<uint8_t *>(std::malloc(len));
@@ -45,6 +43,19 @@ int main(int argc, char *args[])
     wasmer_result_t instantiation_result = wasmer_instantiate(&instance, bytes, len, imports, 0);
  
     assert(instantiation_result == WASMER_OK);
+
+    return instance;
+}
+
+int main(int argc, char *args[])
+{
+
+
+    WASMNode *testNode = new WASMNode();
+
+    testNode->Echo();
+
+    wasmer_instance_t *instance = GetWasmFile("wasm/build/optimized.wasm");
  
     // Let's call a function.
     // Start by preparing the arguments.
@@ -73,14 +84,11 @@ int main(int argc, char *args[])
     printf("Call result:  %d\n", call_result);
     printf("Result: %d\n", results[0].value.I32);
  
-    // `sum(7, 8) == 15`.
-    assert(results[0].value.I32 == 15);
-    assert(call_result == WASMER_OK);
+    // // `sum(7, 8) == 15`.
+    // assert(results[0].value.I32 == 15);
+    // assert(call_result == WASMER_OK);
  
-    wasmer_instance_destroy(instance);
-
-
-    return 0;
+    // wasmer_instance_destroy(instance);
 
     WindowPosition.x = 0;
     WindowPosition.y = 0;
@@ -181,6 +189,7 @@ int main(int argc, char *args[])
             }
         }
         bgfx::frame();
+
     }
 
     // Free up window
