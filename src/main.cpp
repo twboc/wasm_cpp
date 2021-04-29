@@ -24,7 +24,14 @@ int main(int argc, char *args[])
     WindowFrame* _window_frame = new WindowFrame();
     _window_frame->InitVideo();
     SDL_DisplayMode CurrentDisplayMode = _window_frame->SetDisplayMode();
-    SDL_Window* window = _window_frame->CreateWindow();
+    SDL_Window* window = _window_frame->CreateWindow(
+        "WASM CPP - DEMO",
+        CurrentDisplayMode.w/4,
+        CurrentDisplayMode.h/4,
+        CurrentDisplayMode.w/2,
+        CurrentDisplayMode.h/2,
+        SDL_WINDOW_SHOWN
+    );
 
     // Collect information about the window from SDL
     SDL_SysWMinfo wmi;

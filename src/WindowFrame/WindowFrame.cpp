@@ -19,15 +19,15 @@ void WindowFrame::InitVideo()
     }
 }
 
-SDL_Window* WindowFrame::CreateWindow()
+SDL_Window* WindowFrame::CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags)
 {
 	return SDL_CreateWindow(
-        "WASM CPP - DEMO",
-        500,
-        500,
-        500,
-        500,
-        SDL_WINDOW_SHOWN
+        title,
+        x,
+        y,
+        w,
+        h,
+        flags
     );
 }
 
