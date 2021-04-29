@@ -67,16 +67,15 @@ int main(int argc, char *args[])
     wasmer_value_t results[] = {result_one};
  
     // Call the `sum` function with the prepared arguments and the return value.
-    // wasmer_result_t add_result = wasmer_instance_call(instance, "add", arguments, 2, results, 1);
-    wasmer_result_t crazyAdd_result = wasmer_instance_call(instance, "crazyAdd", arguments, 2, results, 1);
+    wasmer_result_t call_result = wasmer_instance_call(instance, "add", arguments, 2, results, 1);
  
     // Let's display the result.
-    printf("Call result:  %d\n", crazyAdd_result);
+    printf("Call result:  %d\n", call_result);
     printf("Result: %d\n", results[0].value.I32);
  
     // `sum(7, 8) == 15`.
-    // assert(results[0].value.I32 == 15);
-    // assert(add_result == WASMER_OK);
+    assert(results[0].value.I32 == 15);
+    assert(call_result == WASMER_OK);
  
     wasmer_instance_destroy(instance);
 

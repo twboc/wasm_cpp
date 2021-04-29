@@ -8,7 +8,7 @@ COMPILER_FLAGS = -Wfatal-errors -w
 BGFX_HEADERS = -Ibgfx/include -Ibx/include -Ibimg/include
 
 WASMER_HEADERS = -I/home/hubert/.wasmer/include
-WASMER_LINKS = /home/hubert/.wasmer/lib/libwasmer.so
+WASMER_LINKS = ~/.wasmer/lib/libwasmer.so
 
 # Update linker flags to include the shared library that you just built
 LINKER_FLAGS = bgfx/.build/linux64_gcc/bin/libbgfx-shared-libRelease.so -lSDL2 -lGL -lX11 -ldl -lpthread -lrt
