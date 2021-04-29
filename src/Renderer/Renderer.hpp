@@ -2,6 +2,8 @@
 #define RENDERER_H
 #pragma once
 
+#include <thread>
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
 #include <SDL2/SDL_syswm.h>
@@ -21,6 +23,7 @@ class Renderer
 		void SetPlatformData(SDL_SysWMinfo wmi);
 		void Bootstrap(int WIDTH, int HEIGHT);
 		void Frame();
+		void Loop();
 		void Shutdown();
 
 };

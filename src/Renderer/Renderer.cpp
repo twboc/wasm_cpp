@@ -47,6 +47,15 @@ void Renderer::Frame()
     bgfx::frame();
 }
 
+void Renderer::Loop()
+{
+    bool quit = false;
+    while (!quit)
+    {
+        this->Frame();
+    }
+}
+
 void Renderer::Shutdown()
 {
     delete this;
