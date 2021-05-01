@@ -53,7 +53,7 @@ void WASMNode::VariadicCall(...)
     {
         val = __builtin_va_arg(args, int);
 
-        printf("typeid(test).name(): %s \n", typeid(val).name());
+        printf("typeid(test).name(): %d %s \n", i, typeid(val).name());
 
         if (val == NULL)
         {

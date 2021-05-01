@@ -17,7 +17,6 @@ int main(int argc, char *args[])
 {
     WASMNode *testNode = new WASMNode("wasm/build/optimized.wasm");
     testNode->Noop();
-    testNode->VariadicCall(1,2,3,4,5,6, "test", "another", "wtf");
 
     SimpleLoop();
     

@@ -39,6 +39,10 @@ class WASMNode
 		void NativeSetExportsNames();
 		WASMNode_native_t* NativeSetExportsKindNames(wasmer_export_t* wasmer_export, const char name);
 
+		const wasmer_export_func_t* NativeExportToFunc(wasmer_export_t* wasmer_export);
+		const uint32_t NativeGetExportParamsArity(wasmer_export_t* wasmer_export);
+
+
 	public:
 
 		WASMNode(const char* path, char* mode = "r");

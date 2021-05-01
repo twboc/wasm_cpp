@@ -42,3 +42,16 @@ void WASMNode::NativeSetExportsNames()
         native.exports_names.push_back(*export_name);
     }
 };
+
+const wasmer_export_func_t* WASMNode::NativeExportToFunc(wasmer_export_t* wasmer_export)
+{
+    return wasmer_export_to_func(wasmer_export);
+};
+
+const uint32_t WASMNode::NativeGetExportParamsArity(wasmer_export_t* wasmer_export)
+{
+    const wasmer_export_func_t* wasmer_func = NativeExportToFunc(wasmer_export);
+    uint32_t* func_params_arity;
+    wasmer_export_func_params_arity(wasmer_func, func_params_arity);
+    return *func_params_arity;
+};
