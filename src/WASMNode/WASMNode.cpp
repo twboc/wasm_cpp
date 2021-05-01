@@ -39,10 +39,3 @@ WASMNode& WASMNode::SetFileNode(FILE *file, const char* path, uint8_t *bytes, lo
     file_node.length = length;
     return *this;
 }
-
-WASMNode& WASMNode::Test01()
-{
-    wasmer_export_descriptor_t test;
-    wasmer_byte_array export_descriptor_name = wasmer_export_descriptor_name(&test);
-    return *this;
-}

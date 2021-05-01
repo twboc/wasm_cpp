@@ -41,8 +41,5 @@ class WASMNode
 		WASMNode& ReadFile(FILE *file, const char* path, char* mode = "r");
 		WASMNode& Instantiate();
 
-		WASMNode& Test01();
-		WASMNode& Test02();
-
 };
 #endif
