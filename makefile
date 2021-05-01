@@ -10,13 +10,13 @@ OBJ_DIR := ./obj
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-BGFX_HEADERS = -Ibgfx/include -Ibx/include -Ibimg/include
+BGFX_HEADERS = -Ideps/bgfx/include -Ideps/bx/include -Ideps/bimg/include
 
 WASMER_HEADERS = -I/home/hubert/.wasmer/include
 WASMER_LINKS = ~/.wasmer/lib/libwasmer.so
 
 # Update linker flags to include the shared library that you just built
-LINKER_FLAGS = bgfx/.build/linux64_gcc/bin/libbgfx-shared-libRelease.so -lSDL2 -lGL -lX11 -ldl -lpthread -lrt
+LINKER_FLAGS = deps/bgfx/.build/linux64_gcc/bin/libbgfx-shared-libRelease.so -lSDL2 -lGL -lX11 -ldl -lpthread -lrt
 
 #This is the target that compiles our executable
 all : $(OBJ)

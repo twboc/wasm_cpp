@@ -10,6 +10,8 @@ apt-cache search libsdl2
 apt-get install libsdl2-dev
 
 #bgfx
+mkdir deps
+cd deps
 git clone git://github.com/bkaradzic/bx.git
 git clone git://github.com/bkaradzic/bimg.git
 git clone git://github.com/bkaradzic/bgfx.git
