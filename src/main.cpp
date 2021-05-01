@@ -23,27 +23,20 @@ int main(int argc, char *args[])
 
     WindowFrame* _window_frame = new WindowFrame();
     _window_frame->InitVideo();
-    SDL_DisplayMode CurrentDisplayMode = _window_frame->SetDisplayMode();
+    SDL_DisplayMode _current_display_mode = _window_frame->SetDisplayMode();
     SDL_Window* window = _window_frame->CreateWindow(
         "WASM CPP - DEMO",
-        CurrentDisplayMode.w/4,
-        CurrentDisplayMode.h/4,
-        CurrentDisplayMode.w/2,
-        CurrentDisplayMode.h/2,
+        _current_display_mode.w/4,
+        _current_display_mode.h/4,
+        _current_display_mode.w/2,
+        _current_display_mode.h/2,
         SDL_WINDOW_SHOWN
     );
-
-    // Collect information about the window from SDL
-    SDL_SysWMinfo wmi;
-    SDL_VERSION(&wmi.version);
-    if (!SDL_GetWindowWMInfo(window, &wmi))
-    {
-        return 1;
-    }
+    SDL_SysWMinfo wmi = _window_frame->GetWMInfo(window);
 
     Renderer *_renderer = new Renderer();
     _renderer->SetPlatformData(wmi);
-    _renderer->Bootstrap(CurrentDisplayMode.w, CurrentDisplayMode.h);
+    _renderer->Bootstrap(_current_display_mode.w, _current_display_mode.h);
 
     // Poll for events and wait till user closes window
     bool quit = false;

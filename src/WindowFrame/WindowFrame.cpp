@@ -58,3 +58,10 @@ SDL_DisplayMode WindowFrame::SetDisplayMode()
 
     return CurrentDisplayMode;
 }
+
+SDL_SysWMinfo WindowFrame::GetWMInfo(SDL_Window* window)
+{
+    SDL_VERSION(&this->wmi.version);
+    SDL_GetWindowWMInfo(window, &this->wmi);
+    return this->wmi;
+};

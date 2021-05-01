@@ -34,9 +34,7 @@ void Renderer::Bootstrap(int WIDTH, int HEIGHT)
     bgfx::setViewRect(0, 0, 0, uint16_t(WIDTH), uint16_t(HEIGHT));
 
     // Clear the view rect
-    bgfx::setViewClear(0,
-                        BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH,
-                        0x443355FF, 1.0f, 0);
+    bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 0x443355FF, 1.0f, 0);
 
     // Set empty primitive on screen
     bgfx::touch(0);
