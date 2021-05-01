@@ -2,6 +2,10 @@
 #define WASMNODE_H
 #pragma once
 
+
+#include <cstdarg>
+#include <stdarg.h>
+#include <typeinfo>
 #include <iostream>
 #include <vector>
 #include <assert.h>
@@ -19,6 +23,9 @@ class WASMNode
 		WASMNode_file_node_t file_node;
 
 		WASMNode& SetFileNode(FILE *file, const char* path, uint8_t *bytes, long length);
+
+
+		
 
 
 		//Native wasmer methods
@@ -40,6 +47,8 @@ class WASMNode
 		WASMNode& Noop();
 		WASMNode& ReadFile(FILE *file, const char* path, char* mode = "r");
 		WASMNode& Instantiate();
+
+		void VariadicCall(...);
 
 };
 #endif

@@ -39,3 +39,31 @@ WASMNode& WASMNode::SetFileNode(FILE *file, const char* path, uint8_t *bytes, lo
     file_node.length = length;
     return *this;
 }
+
+//EXPERIMENTAL IN PROGRESS
+void WASMNode::VariadicCall(...)
+{
+    std::va_list args;
+    int length = 100;
+    int val;
+
+    __builtin_va_start(args, length);
+
+    for(int i = 0; i < 100; i++)
+    {
+        val = __builtin_va_arg(args, int);
+
+        printf("typeid(test).name(): %s \n", typeid(val).name());
+
+        if (val == NULL)
+        {
+            break;
+        }
+
+        printf("value: %d \n",  val);
+
+    }
+
+    __builtin_va_end(args);
+
+};
