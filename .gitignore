@@ -37,3 +37,4 @@ bimg
 bx
 main
 wasm/node_modules
+.vscode
