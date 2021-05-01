@@ -8,8 +8,8 @@
 
 #include "wasmer.h"
 
-#include "./WASMNodeStructs.cpp"
-#include "./WASMNodeUtils.cpp"
+#include "./WASMNode.structs.cpp"
+#include "./WASMNode.utils.cpp"
 
 class WASMNode  
 {

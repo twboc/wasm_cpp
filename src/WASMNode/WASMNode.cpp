@@ -1,20 +1,7 @@
 #include "WASMNode.hpp"
 
-WASMNode::WASMNode(const char* path, char* mode)
-{
-    native.instance = NULL;
-    native.exports = NULL;
-    native.imports = {};
-    native.exports_len = 0;
-	ReadFile(&this->file, path, mode);
-    Instantiate();
-}
-	
-WASMNode::~WASMNode()
-{
-	wasmer_instance_destroy(native.instance);
-    wasmer_exports_destroy(native.exports);
-}
+#include "WASMNode.constructor.cpp"
+#include "WASMNode.native.cpp"
 
 WASMNode& WASMNode::Noop()
 {
@@ -52,54 +39,6 @@ WASMNode& WASMNode::SetFileNode(FILE *file, const char* path, uint8_t *bytes, lo
     file_node.length = length;
     return *this;
 }
-
-WASMNode& WASMNode::NativeSetInstanceExports()
-{
-    wasmer_instance_exports(native.instance, &native.exports);
-}
-
-WASMNode& WASMNode::NativeSetExportsLen()
-{
-    native.exports_len = wasmer_exports_len(native.exports);
-    printf("Number of exports: %d\n", native.exports_len);
-    return *this;
-}
-
-wasmer_export_t* WASMNode::NativeGetExportByIndex(int index)
-{
-    return wasmer_exports_get(native.exports, index);
-};
-
-wasmer_import_export_kind WASMNode::NativeGetExportKind(wasmer_export_t* wasmer_export)
-{
-    return wasmer_export_kind(wasmer_export);
-};
-
-wasmer_byte_array WASMNode::NativeGetExportName(wasmer_export_t* wasmer_export)
-{
-    return wasmer_export_name(wasmer_export);
-};
-
-const char* WASMNode::NativeGetExportNameChar(wasmer_export_t* wasmer_export)
-{
-    return wasmer_byte_array_to_string(
-        wasmer_export_name(wasmer_export)
-    );
-};
-
-void WASMNode::NativeSetExportsNames()
-{
-    for (int i = 0; i < native.exports_len; i++) 
-    {
-        wasmer_export_t* wasmer_export = NativeGetExportByIndex(i);
-        const char* export_name = NativeGetExportNameChar(wasmer_export);
-        printf("Export: %d  %s\n", native.exports_names.size(), export_name);
-        native.exports_names.push_back(*export_name);
-    }
-
-};
-
-///////////////////////////////////
 
 WASMNode& WASMNode::Test01()
 {

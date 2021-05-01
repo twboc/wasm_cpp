@@ -1,5 +1,7 @@
-#include "wasmer.h"
 #include <vector>
+#include <iostream>
+
+#include "wasmer.h"
 
 struct WASMNode_file_node_t {
     const char* path;
