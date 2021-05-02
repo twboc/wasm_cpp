@@ -2,7 +2,6 @@
 #define WASMNODE_H
 #pragma once
 
-
 #include <cstdarg>
 #include <stdarg.h>
 #include <typeinfo>
@@ -12,8 +11,8 @@
 
 #include "wasmer.h"
 
-#include "./WASMNode.structs.cpp"
-#include "./WASMNode.utils.cpp"
+#include "./structs/WASMNode.structs.cpp"
+#include "./utils/WASMNode.utils.cpp"
 
 class WASMNode  
 {
